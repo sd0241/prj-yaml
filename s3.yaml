@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: s3-dataset
+stringData:
+  accessKeyID: { { access_key } }
+  secretAccessKey: { { secret_key } }
+  bucket: { { bucket_name } }
+  endpoint: https://s3.{{region}}.amazonaws.com
+  region: { { region } }
+---
+apiVersion: com.ie.ibm.hpsys/v1alpha1
+kind: Dataset
+metadata:
+  name: s3-dataset
+spec:
+  local:
+    type: "COS"
+    secret-name: "s3-dataset"
